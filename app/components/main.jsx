@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { ChevronUp } from "lucide-react";
 
 export default function Main() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,6 +40,16 @@ export default function Main() {
 
   return (
     <div className="carousel overflow-hidden relative">
+
+    <div className="absolute left-1/2 transform -translate-x-1/2 text-white">
+            <button 
+                onClick={() => "#id_TBF"}
+                className="transition-transform hover:translate-y-1 cursor-pointer"
+                aria-label="Scroll to next section"
+            >
+                <ChevronUp size={50} />
+            </button>
+        </div>
       <div
         className="inner flex transition-transform duration-300"
         style={{ transform: `translate(-${activeIndex * 100}%)` }}
@@ -52,17 +63,17 @@ export default function Main() {
       {/* Carousel Buttons */}
       <div className="absolute bottom-12 w-full pl-20 pr-20 carousel-buttons flex justify-between items-center">
         <button
-          className="button-arrow"
+          className={`button-arrow ${activeIndex === 0 ? 'text-gray-300 cursor-default' : 'text-white'}`}
           onClick={() => updateIndex(activeIndex - 1)}
         >
-          <span className="text-white material-symbols-outlined"> ←	Prev Decade</span>
+          <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}`}> ←	Prev Decade</span>
         </button>
 
         <button
-          className="button-arrow"
+          className={`button-arrow ${activeIndex >= items.length - 1 ? "text-gray-300 cursor-default" : "text-white"}`}
           onClick={() => updateIndex(activeIndex + 1)}
         >
-          <span className="text-white material-symbols-outlined">Next Decade → </span>
+          <span className={`button-arrow material-symbols-outlined ${activeIndex >= items.length - 1 ? 'text-gray-300' : 'text-white'}`}>Next Decade → </span>
         </button>
       </div>
     </div>

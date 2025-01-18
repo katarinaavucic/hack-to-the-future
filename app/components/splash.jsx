@@ -22,7 +22,7 @@ const Splash = () => {
     }, []);
 
     return (
-        <><div className={`p-2 transition-all duration-200 justify-center items-center flex font-mono text-white text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <><div className={`w-full h-full p-2 transition-all duration-200 justify-center items-center flex font-mono text-white text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
             <ui className="list-none">
                 <li>Anushka, Cici, Katarina, Tyler</li>
             </ui>
@@ -38,7 +38,7 @@ const Splash = () => {
         <div className="pb-8 text-white text-center font-sans text-2xl mt-8">
             <h1>Code your way from the past to the future!</h1>
         </div>
-        <div className="absolute left-1/2 transform -translate-x-1/2 text-white">
+        <div className="absolute p-4 left-1/2 transform -translate-x-1/2 text-white">
             <button 
                 onClick={() => "#id_TBF"}
                 className="transition-transform hover:translate-y-1 cursor-pointer"
