@@ -7,6 +7,7 @@ import MacbookPro2021 from "./MacbookPro2021";
 
 export default function Main() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [bgColor, setBgColor] = useState("#F28D8D");
 
   const items = [
     // { id: 1, title: "Prelude", description: "Prelude is a decade", component: <PDP1Computer />, color:"#F28D8D" },
@@ -30,7 +31,7 @@ export default function Main() {
     );
   };
 
-  // Function to update the active index
+  // Function to update the active index and background color
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
@@ -38,10 +39,12 @@ export default function Main() {
       newIndex = items.length - 1;
     }
     setActiveIndex(newIndex);
+    setBgColor(items[newIndex].color);
   };
 
   return (
-    <div className="carousel overflow-hidden relative">
+    <div className="carousel overflow-hidden relative" 
+    style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
       <div
         className="inner flex transition-transform duration-300"
         style={{ transform: `translate(-${activeIndex * 100}%)` }}
