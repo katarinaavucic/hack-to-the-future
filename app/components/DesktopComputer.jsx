@@ -4,14 +4,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-function App() {
+function DesktopComputer() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x01204e);
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('myThreeJsCanvas') });
+      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('desktopComputerCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor( 0xffffff, 0);
       camera.position.y = 40; 
@@ -75,9 +74,9 @@ function App() {
 
   return (
     <div>
-      <canvas id="myThreeJsCanvas" />
+      <canvas id="desktopComputerCanvas" style={{ width: '100%', height: '100%' }}  />
     </div>
   );
 }
 
-export default App;
+export default DesktopComputer;
