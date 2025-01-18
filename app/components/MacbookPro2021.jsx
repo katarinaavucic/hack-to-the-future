@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 function App() {
   useEffect(() => {
@@ -15,7 +14,7 @@ function App() {
       const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('myThreeJsCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor( 0xffffff, 0);
-      camera.position.z = 10; 
+      camera.position.y = 400; 
       const controls = new OrbitControls(camera, renderer.domElement)
 
 

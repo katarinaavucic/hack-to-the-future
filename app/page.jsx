@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 // imports the App component from the App.jsx file 
 // ssr: false ensures that the component is not server-side rendered
-const AppleMacintosh = dynamic(() => import('./components/PDP1Computer'), { ssr: false });
+const AppleMacintosh = dynamic(() => import('./components/DesktopComputer'), { ssr: false });
 
 export default function HomePage() {
   return (
