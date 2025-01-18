@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "lucide": "^0.473.0",
-    "lucide-react": "^0.473.0",
+    "@react-three/fiber": "^9.0.0-rc.4",
     "next": "15.1.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three-stdlib": "^2.35.7",
+    "lucide": "^0.473.0",
+    "lucide-react": "^0.473.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

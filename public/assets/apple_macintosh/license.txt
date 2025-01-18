@@ -1,0 +1,11 @@
+Model Information:
+* title:	Apple Macintosh
+* source:	https://sketchfab.com/3d-models/apple-macintosh-608e0f6ce5e9487eb859f48248e1fac4
+* author:	tzeshi (https://sketchfab.com/timvizesi)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Apple Macintosh" (https://sketchfab.com/3d-models/apple-macintosh-608e0f6ce5e9487eb859f48248e1fac4) by tzeshi (https://sketchfab.com/timvizesi) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

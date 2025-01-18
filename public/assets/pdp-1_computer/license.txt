@@ -1,0 +1,11 @@
+Model Information:
+* title:	PDP-1 Computer
+* source:	https://sketchfab.com/3d-models/pdp-1-computer-2bf2f166747643eea4a82030b33e461e
+* author:	eastcoastinteractive (https://sketchfab.com/eastcoastinteractive)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PDP-1 Computer" (https://sketchfab.com/3d-models/pdp-1-computer-2bf2f166747643eea4a82030b33e461e) by eastcoastinteractive (https://sketchfab.com/eastcoastinteractive) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

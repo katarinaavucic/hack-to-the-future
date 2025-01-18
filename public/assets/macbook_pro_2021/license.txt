@@ -1,0 +1,11 @@
+Model Information:
+* title:	Macbook Pro 2021
+* source:	https://sketchfab.com/3d-models/macbook-pro-2021-abec08722a504f7dbc1f76cd78201f3e
+* author:	Gin Kern Creative Cloud (https://sketchfab.com/GinKern)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Macbook Pro 2021" (https://sketchfab.com/3d-models/macbook-pro-2021-abec08722a504f7dbc1f76cd78201f3e) by Gin Kern Creative Cloud (https://sketchfab.com/GinKern) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
