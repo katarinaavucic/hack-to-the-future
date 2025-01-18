@@ -4,13 +4,14 @@ import PDP1Computer from "./PDP1Computer";
 import AppleMacintosh from "./AppleMacintosh";
 import DesktopComputer from "./DesktopComputer";
 import MacbookPro2021 from "./MacbookPro2021";
+import SingleSpiralNotepad from "./SingleSpiralNotepad";
 
 export default function Main() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [bgColor, setBgColor] = useState("#F28D8D");
+  const [bgColor, setBgColor] = useState("#5B5358");
 
   const items = [
-    // { id: 1, title: "Prelude", description: "Prelude is a decade", component: <PDP1Computer />, color:"#F28D8D" },
+    { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#5B5358" },
     { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer />, color:"#F28D8D" },
     { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh />, color:"#FF6C2E" },
     { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer />, color:"#497EA8" },

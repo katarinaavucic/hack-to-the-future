@@ -1,0 +1,11 @@
+Model Information:
+* title:	Single spiral notepad
+* source:	https://sketchfab.com/3d-models/single-spiral-notepad-80299283fefc44649ae00bf4992b7ba2
+* author:	Sousinho (https://sketchfab.com/sousinho)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Single spiral notepad" (https://sketchfab.com/3d-models/single-spiral-notepad-80299283fefc44649ae00bf4992b7ba2) by Sousinho (https://sketchfab.com/sousinho) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
