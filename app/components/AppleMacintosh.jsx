@@ -2,17 +2,17 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 function App() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color( 0x01204e );
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('myThreeJsCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor( 0xffffff, 0);
       camera.position.z = 750; 
 
       const controls = new OrbitControls(camera, renderer.domElement)
