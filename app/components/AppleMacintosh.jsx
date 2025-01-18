@@ -2,16 +2,20 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 function App() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color( 0x01204e );
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('myThreeJsCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.position.z = 750; 
+
+      const controls = new OrbitControls(camera, renderer.domElement)
 
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -34,11 +38,7 @@ function App() {
       // Animation loop
       const animate = () => {
         requestAnimationFrame(animate);
-        // if (loadedModel) {
-        //   loadedModel.scene.rotation.x += 0.01;
-        //   loadedModel.scene.rotation.y += 0.01;
-        //   loadedModel.scene.rotation.z += 0.01;
-        // }
+        controls.update()
         renderer.render(scene, camera);
         console.log('Rendering scene');
       };
