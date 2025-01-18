@@ -1,20 +1,27 @@
-"use client"
-import { useEffect } from 'react';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+"use client";
+import { useEffect, useState } from "react";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 function App() {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x01204e);
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('myThreeJsCanvas') });
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById("myThreeJsCanvas"),
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor( 0xffffff, 0);
-      camera.position.z = 750; 
+      renderer.setClearColor(0xffffff, 0);
+      camera.position.z = 750;
 
       const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -22,56 +29,122 @@ function App() {
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
 
-      // Load GLTF model
-      let loadedModel;
-      const gltfLoader = new GLTFLoader();
-      gltfLoader.load('/assets/apple_macintosh/scene.gltf', (gltfScene) => {
-        loadedModel = gltfScene;
-        console.log('GLTF Scene:', gltfScene);
+      let canvasTexture; // Texture for the screen
+      let context; // Canvas context
+      let screenMesh; // Reference to the screen mesh
+      let cursorVisible = true; // State to toggle the cursor visibility
+      let lastCursorToggleTime = 0; // Track time to toggle cursor
 
-        // Traverse the model and log each mesh
-        gltfScene.scene.traverse((node) => {
-          if (node.isMesh) {
-            console.log('Mesh found:', node.name, node);
+      // Initialize canvas and texture
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 256;
+      context = canvas.getContext("2d");
+      context.fillStyle = "#111111"; // Black background
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#00ff00"; // Green text
+      context.font = "16px monospace";
+      context.fillText("Hello, World!", 10, 30);
+      canvasTexture = new THREE.CanvasTexture(canvas);
+
+      // Load GLTF model
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load(
+        "/assets/apple_macintosh/scene.gltf",
+        (gltfScene) => {
+          console.log("GLTF Scene:", gltfScene);
+
+          // Traverse the model to find the screen mesh
+          screenMesh = gltfScene.scene.getObjectByName("Object_5"); // Replace with actual name
+          if (screenMesh) {
+            screenMesh.material = new THREE.MeshBasicMaterial({
+              map: canvasTexture,
+            });
           }
+
+          gltfScene.scene.rotation.y = Math.PI / 8;
+          gltfScene.scene.position.y = 3;
+          gltfScene.scene.scale.set(10, 10, 10);
+          scene.add(gltfScene.scene);
+        },
+        undefined,
+        (error) => {
+          console.error("An error occurred while loading the model:", error);
+        }
+      );
+
+      // Update the canvas texture with new text
+      const updateCanvasText = (text) => {
+        if (!context || !screenMesh) return;
+
+        // Clear the previous text
+        context.fillStyle = "#111111"; // Clear previous text
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#00ff00"; // Green text
+
+        // Draw each line of text
+        let yPosition = 30; // Initial y-position for the first line
+        const lineHeight = 20; // Height for each line
+
+        // Split the text into lines that fit within the canvas width
+        const lines = text.split("\n");
+        lines.forEach((line) => {
+          context.fillText(line, 10, yPosition);
+          yPosition += lineHeight;
         });
 
-        const screenMesh = gltfScene.scene.getObjectByName("Object_5"); // Replace with actual name
-        if (screenMesh) {
-          // Create a sample texture (e.g., color or canvas-based)
-          const canvas = document.createElement('canvas');
-          const context = canvas.getContext('2d');
-          canvas.width = 256;
-          canvas.height = 256;
-          context.fillStyle = '#FFFF00'; // Yellow background
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          context.fillStyle = '#00ff00'; // Green text
-          context.font = '20px Arial';
-          context.fillText('Hello, World!', 50, 128);
-          const canvasTexture = new THREE.CanvasTexture(canvas);
-
-          screenMesh.material = new THREE.MeshBasicMaterial({ map: canvasTexture });
+        // Draw the cursor at the end of the current line
+        const cursorX = 10 + context.measureText(lines[lines.length - 1]).width; // Position at end of last line
+        const cursorY = yPosition - lineHeight - 14; // Cursor at the bottom of the last line
+        if (cursorVisible) {
+          context.fillStyle = "#00ff00"; // Cursor color (green)
+          context.fillRect(cursorX, cursorY, 8, 16); // Draw the cursor
         }
 
-        gltfScene.scene.rotation.y = Math.PI / 8;
-        gltfScene.scene.position.y = 3;
-        gltfScene.scene.scale.set(10, 10, 10);
-        scene.add(gltfScene.scene);
-      }, undefined, (error) => {
-        console.error('An error occurred while loading the model:', error);
+        canvasTexture.needsUpdate = true; // Ensure the texture updates
+      };
+
+      // Listen for keyboard input
+      let inputText = "";
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Backspace") {
+          inputText = inputText.slice(0, -1); // Remove last character
+        } else if (event.key === "Enter") {
+          inputText += "\n"; // Add a newline when Enter is pressed
+        } else if (event.key.length === 1) {
+          inputText += event.key; // Append character to input
+        }
+        inputText = inputText.toUpperCase();
+        if (inputText === "10 PRINT \"HELLO WORLD!\"\n20 GOTO 10") {
+          console.log('Successful Input');
+        }
+        updateCanvasText(inputText);
       });
+
+
+
+      // Function to toggle the cursor visibility
+      const toggleCursorVisibility = () => {
+        const now = Date.now();
+        if (now - lastCursorToggleTime > 500) { // Toggle every 500ms
+          cursorVisible = !cursorVisible;
+          lastCursorToggleTime = now;
+          updateCanvasText(inputText); // Update text with cursor toggle
+        }
+      };
 
       // Animation loop
       const animate = () => {
         requestAnimationFrame(animate);
         controls.update();
+        toggleCursorVisibility(); // Toggle cursor visibility
         renderer.render(scene, camera);
-        console.log('Rendering scene');
       };
       animate();
 
       // Handle window resize
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
