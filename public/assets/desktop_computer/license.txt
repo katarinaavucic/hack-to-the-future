@@ -1,0 +1,11 @@
+Model Information:
+* title:	Desktop Computer
+* source:	https://sketchfab.com/3d-models/desktop-computer-561abc2fc95941609fc7bc6f232895c2
+* author:	Tyler P Halterman (https://sketchfab.com/tylerhalterman)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Desktop Computer" (https://sketchfab.com/3d-models/desktop-computer-561abc2fc95941609fc7bc6f232895c2) by Tyler P Halterman (https://sketchfab.com/tylerhalterman) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
