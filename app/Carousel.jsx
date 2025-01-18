@@ -45,7 +45,7 @@ export const Carousel = () => {
   return (
     <div style={{ backgroundColor: "#000", color: "#fff", padding: "20px", textAlign: "center" }}>
       {/* Top Arrow */}
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+      <div style={{ display: "flex", marginBottom: "20px" }}>
         <ChevronUp size={50} color="#fff" />
       </div>
 
@@ -57,7 +57,7 @@ export const Carousel = () => {
           display: "flex",
           transform: `translateX(-${activeIndex * 50}%)`,
           transition: "transform 0.5s ease-in-out",
-          width: `${items.length * 100}%`,
+          width: "100%",
             }}
           >
             {items.map((item) => (
@@ -82,7 +82,8 @@ export const Carousel = () => {
               maxWidth: "100%",
               height: "auto",
               maxHeight: "300px",
-              objectFit: "fill",
+
+              alignItems: "center",
             }}
               />
             )}
