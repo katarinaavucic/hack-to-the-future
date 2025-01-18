@@ -59,17 +59,17 @@ export default function Main() {
       {/* Carousel Buttons */}
       <div className="absolute bottom-12 w-full pl-20 pr-20 carousel-buttons flex justify-between items-center">
         <button
-          className="button-arrow"
+          className={`button-arrow ${activeIndex === 0 ? 'text-gray-300 cursor-default' : 'text-white'}`}
           onClick={() => updateIndex(activeIndex - 1)}
         >
-          <span className="text-white material-symbols-outlined"> ←	Prev Decade</span>
+          <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}`}> ←	Prev Decade</span>
         </button>
 
         <button
-          className="button-arrow"
+          className={`button-arrow ${activeIndex >= items.length - 1 ? "text-gray-300 cursor-default" : "text-white"}`}
           onClick={() => updateIndex(activeIndex + 1)}
         >
-          <span className="text-white material-symbols-outlined">Next Decade → </span>
+          <span className={`button-arrow material-symbols-outlined ${activeIndex >= items.length - 1 ? 'text-gray-300' : 'text-white'}`}>Next Decade → </span>
         </button>
       </div>
     </div>
