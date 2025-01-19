@@ -120,6 +120,7 @@ function App() {
           console.log('Successful Input');
         }
         updateCanvasText(inputText);
+
       });
 
 
