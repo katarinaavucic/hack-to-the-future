@@ -5,7 +5,7 @@ Hack to the Future is an interactive educational browser experience that guides 
 
 👾 Play the game NOW at [http://www.hacktothefuture.co](http://www.hacktothefuture.co)
 
-## Our inspiration 💡
+## Our Inspiration 💡
 All of us are well into our computer science academic careers at this point in our lives, and over the years we have developed a great appreciation of the history of programming. At first when we heard the theme (Perspective), we had a tough time thinking of a project idea. One thing we had all agreed on though, was that we didn’t want to focus purely on generative AI, as we had all had participated in plenty of hackathons prior, and we were all pretty “AI-ed out”. We decided we wanted to work on a project using a technology we had never used before but looked really cool, ThreeJS, and thought an interactive journey through the decades was a perfect love letter to the study of computer science.
 
 ![Screenshot 2025-01-19 at 4.44.21 AM.png](https://cdn.dorahacks.io/static/files/1947df383968c15ba94739f4dd4b01e4.png)
