@@ -5,7 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { motion } from 'framer-motion';
 
-function AppleMacintosh( {setSeventiesSuccess} ) {
+function AppleMacintosh({ setSeventiesSuccess }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Initialize scene, camera, and renderer
@@ -23,11 +23,37 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
       renderer.setClearColor(0xffffff, 0);
       camera.position.z = 750;
 
+      // Add Particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 500;
+      
+      // Define the size of the bounding box
+      const boxSize = 2000 // Adjust this to make the bounding box larger or smaller
+      
+      const positions = new Float32Array(particlesCount * 3);
+      for (let i = 0; i < particlesCount * 3; i++) {
+        // Generate positions within the range of [-boxSize/2, boxSize/2]
+        positions[i] = (Math.random() - 0.5) * boxSize;
+      }
+      
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 4, // Adjust particle size
+        color: 0xffffff, // White particles
+      });
+      
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.minPolarAngle = 0;
-      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.maxPolarAngle = Math.PI * 0.5;
       controls.target.set(0, 45, 0);
       controls.enablePan = false;
+      controls.maxDistance = 800;
+      controls.minDistance = 250;
 
       // // Add ambient light
       // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -138,7 +164,7 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
           inputText += event.key; // Append character to input
         }
         inputText = inputText.toUpperCase();
-        if (inputText === "10 PRINT \"HELLO WORLD!\"\n20 GOTO 10") {
+        if (inputText === "10 PRINT \"HELLO WORLD!\"") {
           setSeventiesSuccess(true);
         }
         updateCanvasText(inputText);
@@ -235,8 +261,8 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
           width: "300px", // Ensure consistent width for better justification
         }}
         dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
-        />
-      </div>
+      />
+    </div>
   );
 }
 

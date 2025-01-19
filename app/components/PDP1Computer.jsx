@@ -26,6 +26,32 @@ function PDP1Computer({ setSixtiesSuccess }) {
       controls.maxPolarAngle = Math.PI * 0.5;
       controls.target.set(-3, 8, 0);
       controls.enablePan = false;
+      controls.maxDistance = 200;
+      controls.minDistance = 20;
+
+      // Add Particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 500;
+
+      // Define the size of the bounding box
+      const boxSize = 2000 // Adjust this to make the bounding box larger or smaller
+
+      const positions = new Float32Array(particlesCount * 3);
+      for (let i = 0; i < particlesCount * 3; i++) {
+        // Generate positions within the range of [-boxSize/2, boxSize/2]
+        positions[i] = (Math.random() - 0.5) * boxSize;
+      }
+
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 4, // Adjust particle size
+        color: 0xffffff, // White particles
+      });
+
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
 
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -106,7 +132,7 @@ function PDP1Computer({ setSixtiesSuccess }) {
         inputText = inputText.toUpperCase();
         if (inputText === 'PROGRAM HELLO\nPRINT *, "HELLO WORLD!"\nEND PROGRAM HELLO') {
           console.log("Success!");
-          setSixtiesSuccess(true); 
+          setSixtiesSuccess(true);
         }
 
         updateCanvasText();

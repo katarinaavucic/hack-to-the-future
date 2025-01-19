@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { motion } from 'framer-motion';
 
-function DesktopComputer({setMillSuccess}) {
+function DesktopComputer({ setMillSuccess }) {
   const [inputText, setInputText] = useState("");
   const sceneRef = useRef(null);
   const textureRef = useRef({
@@ -26,16 +26,16 @@ function DesktopComputer({setMillSuccess}) {
 
     // Clear the canvas with a transparent background
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // Set text properties
     context.fillStyle = 'black';
     context.font = '48px monospace';
-    
+
     // Draw text
     const lines = text.split("\n");
     let yPosition = 160;
     const lineHeight = 60;
-    
+
     lines.forEach((line) => {
       context.fillText(line, 50, yPosition);
       yPosition += lineHeight;
@@ -50,31 +50,58 @@ function DesktopComputer({setMillSuccess}) {
     // Initialize scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    
+
     // Setup camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(30, 40, 20);
-    
+
     // Setup renderer
-    const renderer = new THREE.WebGLRenderer({ 
+    const renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('desktopComputerCanvas'),
       antialias: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xffffff, 0);
-    
+
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.minPolarAngle = 0;
-    controls.maxPolarAngle =  Math.PI * 0.5;
+    controls.maxPolarAngle = Math.PI * 0.5;
     controls.target.set(-10, 13, -10);
+    controls.enablePan = false;
+    controls.maxDistance = 80;
+    controls.minDistance = 15;
+
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
-    
+
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
+
+    // Add Particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 500;
+
+    // Define the size of the bounding box
+    const boxSize = 2000 // Adjust this to make the bounding box larger or smaller
+
+    const positions = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount * 3; i++) {
+      // Generate positions within the range of [-boxSize/2, boxSize/2]
+      positions[i] = (Math.random() - 0.5) * boxSize;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 4, // Adjust particle size
+      color: 0xffffff, // White particles
+    });
+
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
 
     // Create background plane
     const backgroundTexture = new THREE.TextureLoader().load('/assets/eclipse.png');
@@ -94,7 +121,7 @@ function DesktopComputer({setMillSuccess}) {
     canvas.width = 1024;
     canvas.height = 1024;
     const context = canvas.getContext('2d');
-    
+
     textureRef.current.canvas = canvas;
     textureRef.current.context = context;
 
@@ -111,11 +138,11 @@ function DesktopComputer({setMillSuccess}) {
     const textPlane = new THREE.Mesh(planeGeometry, planeMaterial);
     textPlane.position.set(-7.5, 13.5, -9);  // Slightly in front of background
     textPlane.rotation.set(0, 0.65, 0);
-    
+
     // Store references
     textureRef.current.textPlane = textPlane;
     textureRef.current.canvasTexture = canvasTexture;
-    
+
     // Add plane to scene
     scene.add(textPlane);
 
@@ -172,7 +199,7 @@ function DesktopComputer({setMillSuccess}) {
     updateCanvasText(inputText);
   }, [inputText]);
 
-  
+
   const [leftText, setLeftText] = useState(
     "In the early 2000s, the desktop computer became a common household item. Models like Dell and HP were widely used, providing more people with access to computers and the ability to code. Python, a high-level general-purpose coding language, was developed in the late 1980s by programmer Guido van Rossum. The language gained popularity for its readability and close association to human language, making it one of the most popular coding languages for beginngers, even today!"
   ); const [rightText, setRightText] = useState(
@@ -225,7 +252,7 @@ function DesktopComputer({setMillSuccess}) {
           borderRadius: "8px",
           width: "300px", // Ensure consistent width for better justification
         }}
-      dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+        dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
       />
     </div>
   );

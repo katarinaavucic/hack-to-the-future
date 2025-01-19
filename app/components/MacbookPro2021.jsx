@@ -15,7 +15,7 @@ function MacbookPro2021() {
     context: null
   });
 
-  
+
 
   // Function to update canvas text
   const updateCanvasText = (text) => {
@@ -24,16 +24,16 @@ function MacbookPro2021() {
 
     // Clear the canvas with a fully transparent background
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // Set text properties
     context.fillStyle = '#FFFFFF';
     context.font = '28px arial';
-    
+
     // Draw text
     const lines = text.split("\n");
     let yPosition = 100;
     const lineHeight = 60;
-    
+
     lines.forEach((line) => {
       context.fillText(line, 50, yPosition);
       yPosition += lineHeight;
@@ -48,31 +48,57 @@ function MacbookPro2021() {
     // Initialize scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    
+
     // Setup camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 400, 200);
-    
+
+    // Add Particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 500;
+
+    // Define the size of the bounding box
+    const boxSize = 2000 // Adjust this to make the bounding box larger or smaller
+
+    const positions = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount * 3; i++) {
+      // Generate positions within the range of [-boxSize/2, boxSize/2]
+      positions[i] = (Math.random() - 0.5) * boxSize;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 4, // Adjust particle size
+      color: 0x111111, // White particles
+    });
+
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
+
+
     // Setup renderer with alpha
-    const renderer = new THREE.WebGLRenderer({ 
+    const renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('macbookProCanvas'),
       antialias: true,
       alpha: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xffffff, 0);
-    
+
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.minPolarAngle = 0;
-    controls.maxPolarAngle =  Math.PI * 0.5;
+    controls.maxPolarAngle = Math.PI * 0.5;
     controls.target.set(-40, 98, -35);
     controls.enablePan = false;
+    controls.maxDistance = 800;
+    controls.minDistance = 100;
 
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
-    
+
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
@@ -95,7 +121,7 @@ function MacbookPro2021() {
     canvas.width = 1024;
     canvas.height = 1024;
     const context = canvas.getContext('2d', { alpha: true });
-    
+
     textureRef.current.canvas = canvas;
     textureRef.current.context = context;
 
@@ -114,11 +140,11 @@ function MacbookPro2021() {
     const textPlane = new THREE.Mesh(planeGeometry, planeMaterial);
     textPlane.position.set(7, 47, -114);
     textPlane.rotation.set(0, 0.4, 0);
-    
+
     // Store references
     textureRef.current.textPlane = textPlane;
     textureRef.current.canvasTexture = canvasTexture;
-    
+
     // Add plane to scene
     scene.add(textPlane);
 
