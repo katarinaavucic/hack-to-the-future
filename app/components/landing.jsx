@@ -140,7 +140,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
     }
 
     return (
-        <div id="carousel" className="hsv-filter relative h-screen flex flex-col justify-center items-center text-white">
+        <div id="carousel" className="crt-filter relative h-screen flex flex-col justify-center items-center text-white">
             <div className="mt-8">
                 <button
                     onClick={() => document.getElementById('splash').scrollIntoView({ behavior: 'smooth' })}
