@@ -62,8 +62,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 };
 
 const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s,
-    eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess, twentiesSuccess
- }) => {
+    eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess}) => {
     var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
     const stop60s = stop;
     var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
@@ -175,7 +174,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
                             ← Prev Decade
                         </span>
                     </button>
-                    {((activeIndex === 0) ||
+                    {((activeIndex === 0 && eightSuccess) ||
                       (activeIndex === 1 && sixtiesSuccess) ||
                       (activeIndex === 2 && seventiesSuccess) ||
                       (activeIndex === 3 && millSuccess) || 
@@ -208,7 +207,6 @@ export default function Landing() {
     const [sixtiesSuccess, setSixtiesSuccess] = useState(false);
     const [seventiesSuccess, setSeventiesSuccess] = useState(false);
     const [millSuccess, setMillSuccess] = useState(false);
-    const [twentiesSuccess, setTwentiesSuccess] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
@@ -219,7 +217,7 @@ export default function Landing() {
     }, []);
 
     const items = [
-        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#18181b" },
+        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad setEightSuccess={setEightSuccess}/>, color:"#18181b" },
         { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer setSixtiesSuccess={setSixtiesSuccess} />, color:"#F28D8D" },
         { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh setSeventiesSuccess={setSeventiesSuccess} />, color:"#FF6C2E" },
         { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer setMillSuccess={setMillSuccess} />, color:"#497EA8" },
@@ -244,7 +242,7 @@ export default function Landing() {
             <div className="snap-start">
                 <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} play1800s={play1800s} stop1800s={stop} 
                 playing1800s={playing1800s} setPlaying1800s={setPlaying1800s} eightSuccess={eightSuccess} sixtiesSuccess={sixtiesSuccess}
-                seventiesSuccess={seventiesSuccess} millSuccess={millSuccess} twentiesSuccess={twentiesSuccess}/>
+                seventiesSuccess={seventiesSuccess} millSuccess={millSuccess}/>
             </div>
         </div>
     );
