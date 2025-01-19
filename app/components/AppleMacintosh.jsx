@@ -29,6 +29,22 @@ function App() {
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
 
+      // // Add Line and Text
+      // const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0ffffff }, { linewidth: 10 });
+      // const points = [];
+
+      // var screenVector = new THREE.Vector3(320, 200, 0.5);
+      // screenVector.unproject(camera);
+
+      // points.push(new THREE.Vector3(- 10, 0, 0));
+      // points.push(screenVector);
+      // points.push(new THREE.Vector3(10, 0, 0));
+
+      // const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      // const line = new THREE.Line(geometry, lineMaterial);
+      // scene.add(line);
+
+
       let canvasTexture; // Texture for the screen
       let context; // Canvas context
       let screenMesh; // Reference to the screen mesh
@@ -122,8 +138,6 @@ function App() {
         updateCanvasText(inputText);
 
       });
-
-
 
       // Function to toggle the cursor visibility
       const toggleCursorVisibility = () => {
