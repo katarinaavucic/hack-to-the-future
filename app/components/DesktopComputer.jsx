@@ -63,6 +63,9 @@ function DesktopComputer() {
     renderer.setClearColor(0xffffff, 0);
     
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle =  Math.PI * 0.5;
+    controls.target.set(-10, 13, -10);
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);

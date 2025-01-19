@@ -21,6 +21,9 @@ function PDP1Computer() {
       renderer.setClearColor(0xffffff, 0);
       camera.position.z = 100;
       const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.target.set(-3, 8, 0);
 
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);

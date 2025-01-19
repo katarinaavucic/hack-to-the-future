@@ -13,9 +13,13 @@ function SingleSpiralNotepad() {
       const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('singleSpiralNotepadCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 0);
-      camera.position.set(0.5, 2, 2.5);
+      camera.position.set(0.7, 2, 2.5);
 
       const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.target.set(0.5, 0, 0);
+      controls.enablePan = false;
 
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
