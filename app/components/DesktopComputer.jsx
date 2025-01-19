@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { motion } from 'framer-motion';
 
 function DesktopComputer() {
   const [inputText, setInputText] = useState("");
@@ -168,9 +169,62 @@ function DesktopComputer() {
     updateCanvasText(inputText);
   }, [inputText]);
 
+  
+  const [leftText, setLeftText] = useState(
+    "Python, a high-level general-purpose coding language, was developed in the late 1980s by programmer Guido van Rossum. Its name comes from the British comedy series 'Monty Python's Flying Circus', which Van Rossum gave was reading at the time of its creation. The language gained popularity for its readability and close assosciation to human language, making it one of the most popular coding languages today!"
+  ); const [rightText, setRightText] = useState(
+    "Here's how to print hello world in Python\n\nprint(\"Hello, World!\")"
+  );
+
   return (
-    <div>
-      <canvas id="desktopComputerCanvas" style={{ width: '100%', height: '100%' }}  />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="desktopComputerCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {leftText}
+      </motion.div>
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {rightText}
+      </motion.div>
     </div>
   );
 }
