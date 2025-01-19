@@ -8,7 +8,6 @@ function PDP1Computer() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x01204e);
       const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,

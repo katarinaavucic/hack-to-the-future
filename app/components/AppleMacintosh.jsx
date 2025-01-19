@@ -10,7 +10,6 @@ function AppleMacintosh() {
     if (typeof window !== "undefined") {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x01204e);
       const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -175,7 +174,7 @@ function AppleMacintosh() {
   const [leftText, setLeftText] = useState(
     "The Apple Macintosh, launched in 1984, revolutionized personal computing by introducing a user-friendly graphical user interface (GUI) and the innovative use of a mouse, setting it apart from text-based systems. It democratized computing, making technology accessible to non-technical users and influencing future GUI designs. The Mac became a platform for creative industries, thanks to software like Adobe Photoshop and Aldus PageMaker. Its emphasis on aesthetics, integration of hardware and software, and intuitive design set new standards in computing, sparking innovation across the industry and shaping how people interact with computers."
   ); const [rightText, setRightText] = useState(
-    "Here's how     <br />to print hello world"
+    "Here's how to print hello world"
   );
 
   return (
