@@ -19,8 +19,6 @@ export default function Home() {
       <link rel="icon" type="image/x-icon" size="32x32" href="/favicon.ico" />
     </Head>
     <div>
-      {/* <Splash />
-      <Main /> */}
       <Landing />
     </div>
 

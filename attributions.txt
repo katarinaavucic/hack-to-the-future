@@ -1,0 +1,95 @@
+Hack<-ToTheFuture is proudly created by:
+Tyler Steptoe, Anushka Sethi, Katarina Vucic, and, Cici (Zizhen) Zhan
+
+We would like to thank and credit the following free Three.JS model licenses:
+
+Model Information:
+* title:	Apple Macintosh
+* source:	https://sketchfab.com/3d-models/apple-macintosh-608e0f6ce5e9487eb859f48248e1fac4
+* author:	tzeshi (https://sketchfab.com/timvizesi)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Apple Macintosh" (https://sketchfab.com/3d-models/apple-macintosh-608e0f6ce5e9487eb859f48248e1fac4) by tzeshi (https://sketchfab.com/timvizesi) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+Model Information:
+* title:	Desktop PC
+* source:	https://sketchfab.com/3d-models/desktop-pc-7030da42a907455ea98fabedca0a5192
+* author:	Rakshaan (https://sketchfab.com/rakshaan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Desktop PC" (https://sketchfab.com/3d-models/desktop-pc-7030da42a907455ea98fabedca0a5192) by Rakshaan (https://sketchfab.com/rakshaan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+Model Information:
+* title:	Laptop
+* source:	https://sketchfab.com/3d-models/laptop-7d870e900889481395b4a575b9fa8c3e
+* author:	Aullwen (https://sketchfab.com/Aullwen)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Laptop" (https://sketchfab.com/3d-models/laptop-7d870e900889481395b4a575b9fa8c3e) by Aullwen (https://sketchfab.com/Aullwen) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+Model Information:
+* title:	Macbook Pro 2021
+* source:	https://sketchfab.com/3d-models/macbook-pro-2021-abec08722a504f7dbc1f76cd78201f3e
+* author:	Gin Kern Creative Cloud (https://sketchfab.com/GinKern)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Macbook Pro 2021" (https://sketchfab.com/3d-models/macbook-pro-2021-abec08722a504f7dbc1f76cd78201f3e) by Gin Kern Creative Cloud (https://sketchfab.com/GinKern) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+Model Information:
+* title:	PDP-1 Computer
+* source:	https://sketchfab.com/3d-models/pdp-1-computer-2bf2f166747643eea4a82030b33e461e
+* author:	eastcoastinteractive (https://sketchfab.com/eastcoastinteractive)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PDP-1 Computer" (https://sketchfab.com/3d-models/pdp-1-computer-2bf2f166747643eea4a82030b33e461e) by eastcoastinteractive (https://sketchfab.com/eastcoastinteractive) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+Model Information:
+* title:	Single spiral notepad
+* source:	https://sketchfab.com/3d-models/single-spiral-notepad-80299283fefc44649ae00bf4992b7ba2
+* author:	Sousinho (https://sketchfab.com/sousinho)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Single spiral notepad" (https://sketchfab.com/3d-models/single-spiral-notepad-80299283fefc44649ae00bf4992b7ba2) by Sousinho (https://sketchfab.com/sousinho) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+
+We would also like to credit the following sounds for the background musics:
+
+Beethoven - Fur Elise
+Beatles - Yellow Submarine (instrumental)
+Rick Astley - Never Gonna Give You Up (instrumental)
+NSYNC - Bye Bye Bye (instrumental)
+Hozier - Too Sweet (instrumental)
+
+
+Finally, we would like to credit the following website for the creation of our logos:
+
+https://www.textstudio.com/logo/back-to-the-past-text-243

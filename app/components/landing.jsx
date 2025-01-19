@@ -23,7 +23,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 
 
     return (
-        <div className={`crt-filter h-screen flex flex-col items-center justify-between ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
+        <div className={`h-screen flex flex-col items-center justify-between ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
             {/* <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li>Anushka, Cici, Katarina, Tyler</li>
@@ -44,7 +44,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
                 <a href="https://github.com/katarinaavucic/hack-to-the-future" className="cursor-pointer hover:italic">
                     How It Was Made
                 </a>
-                <a href="/attributions" className="cursor-pointer hover:italic">
+                <a href="https://github.com/katarinaavucic/hack-to-the-future/blob/main/attributions.txt" className="cursor-pointer hover:italic">
                     Attributions
                 </a>
             </div>
@@ -62,8 +62,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 };
 
 const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s,
-    eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess, twentiesSuccess
- }) => {
+    eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess}) => {
     var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
     const stop60s = stop;
     var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
@@ -80,7 +79,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
     const CarouselItem = ({ item, width }) => {
         return (
             <div className="carousel-item flex-shrink-0 flex flex-col items-center justify-center min-h-screen w-full">
-                <div className="carousel-component object-contain mx-auto" style={{ transform: 'scale(0.9)', position: 'relative', width: '100%', height: '100%' }}>
+                <div className="carousel-component object-contain mx-auto" style={{position: 'relative', width: '100%', height: '100%' }}>
                     {item.component}
                 </div>
                 <div className="text-white carousel-item-text text-center mt-4">{item.description}</div>
@@ -143,7 +142,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
 
     return (
         <div id="carousel" className="crt-filter relative h-screen flex flex-col justify-center items-center text-white">
-            <div className="mt-8">
+            <div className="absolute top-4 left-0 right-0 flex justify-center z-50 pointer-events-auto">
                 <button
                     onClick={() => document.getElementById('splash').scrollIntoView({ behavior: 'smooth' })}
                     className={`transition-transform hover:translate-y-1 cursor-pointer ${activeIndex === items.length - 1 ? 'text-gray-900' : 'text-white'}`}
@@ -175,7 +174,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
                             ← Prev Decade
                         </span>
                     </button>
-                    {((activeIndex === 0) ||
+                    {((activeIndex === 0 && eightSuccess) ||
                       (activeIndex === 1 && sixtiesSuccess) ||
                       (activeIndex === 2 && seventiesSuccess) ||
                       (activeIndex === 3 && millSuccess) || 
@@ -208,7 +207,6 @@ export default function Landing() {
     const [sixtiesSuccess, setSixtiesSuccess] = useState(false);
     const [seventiesSuccess, setSeventiesSuccess] = useState(false);
     const [millSuccess, setMillSuccess] = useState(false);
-    const [twentiesSuccess, setTwentiesSuccess] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
@@ -219,7 +217,7 @@ export default function Landing() {
     }, []);
 
     const items = [
-        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#18181b" },
+        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad setEightSuccess={setEightSuccess}/>, color:"#18181b" },
         { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer setSixtiesSuccess={setSixtiesSuccess} />, color:"#F28D8D" },
         { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh setSeventiesSuccess={setSeventiesSuccess} />, color:"#FF6C2E" },
         { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer setMillSuccess={setMillSuccess} />, color:"#497EA8" },
@@ -237,14 +235,14 @@ export default function Landing() {
     };
 
     return (
-        <div className="overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
+        <div className="crt-filter overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
             <div id="splash" className="snap-start">
                 <Splash isVisible={isVisible} bounceComplete={bounceComplete} activeIndex={activeIndex} play1800s={play1800s} stop1800s={stop} />
             </div>
             <div className="snap-start">
                 <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} play1800s={play1800s} stop1800s={stop} 
                 playing1800s={playing1800s} setPlaying1800s={setPlaying1800s} eightSuccess={eightSuccess} sixtiesSuccess={sixtiesSuccess}
-                seventiesSuccess={seventiesSuccess} millSuccess={millSuccess} twentiesSuccess={twentiesSuccess}/>
+                seventiesSuccess={seventiesSuccess} millSuccess={millSuccess}/>
             </div>
         </div>
     );

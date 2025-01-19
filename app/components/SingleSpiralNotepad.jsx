@@ -1,10 +1,11 @@
 "use client"
-import { useEffect } from 'react';
+import { useEffect,  useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { motion } from 'framer-motion';
 
-function SingleSpiralNotepad() {
+function SingleSpiralNotepad({setEightSuccess}) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
@@ -53,6 +54,8 @@ function SingleSpiralNotepad() {
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
 
+      var count = 0;
+
       // Load GLTF model
       let loadedModel;
       const gltfLoader = new GLTFLoader();
@@ -94,7 +97,11 @@ function SingleSpiralNotepad() {
 
           // Function to handle mouse clicks and draw on the texture
           function onMouseDown(event) {
+            count++;
             isDrawing = true;
+            if (count > 1) {
+              setEightSuccess(true);
+            }
           }
 
           // Function to stop drawing on mouse up
@@ -165,9 +172,60 @@ function SingleSpiralNotepad() {
     });
   }, []);
 
+  
+  const [leftText, setLeftText] = useState(
+    "Welcome to... \n\nHack to the Future!\n\nThis interactive educational experience will guide you through the journey of code, from the early days of computing to the unique nature of programming today.\n\nWe hope that viewing programming through these different perspectives throughout time will allow you a better insight into its evolution."
+  ); const [rightText, setRightText] = useState(
+    "Please write “Hello World” on the paper."
+  );
+
   return (
-    <div>
-      <canvas id="singleSpiralNotepadCanvas" style={{ width: '100%', height: '100%' }} />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="singleSpiralNotepadCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+        dangerouslySetInnerHTML={{ __html: leftText.replace(/\n/g, "<br />") }}
+      />
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+        dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+      />
     </div>
   );
 }
