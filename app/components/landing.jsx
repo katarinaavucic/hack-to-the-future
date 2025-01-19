@@ -7,9 +7,23 @@ import DesktopComputer from "./DesktopComputer";
 import MacbookPro2021 from "./MacbookPro2021";
 import SingleSpiralNotepad from "./SingleSpiralNotepad";
 import "../crt.css"
-const Splash = ({ isVisible, bounceComplete, activeIndex }) => {
+import useSound from "use-sound";
+
+
+const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }) => {
+    const [moved, setMoved] = useState(false);
+    
+    const moveAndPlay = () => {
+        document.getElementById('carousel').scrollIntoView({ behavior: 'smooth' });
+        if (!moved) {
+            play1800s();
+        }
+        setMoved(true);
+    }
+
+
     return (
-        <div className={`crt-filter h-screen flex flex-col items-center justify-between text-white ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
+        <div className={`crt-filter h-screen flex flex-col items-center justify-between ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
             {/* <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li>Anushka, Cici, Katarina, Tyler</li>
@@ -36,7 +50,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex }) => {
             </div>
             <div className="mb-8">
                 <button
-                    onClick={() => document.getElementById('carousel').scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => moveAndPlay()}
                     className="transition-transform hover:translate-y-1 cursor-pointer"
                     aria-label="Scroll to next section"
                 >
@@ -47,7 +61,20 @@ const Splash = ({ isVisible, bounceComplete, activeIndex }) => {
     );
 };
 
-const Carousel = ({ items, activeIndex, updateIndex }) => {
+const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s }) => {
+    var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
+    const stop60s = stop;
+    var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
+    const stop70s = stop;
+    var [play2000s,{ stop }] = useSound("Bye_Bye_Bye(inst).mp3", {});
+    const stop00s = stop;
+    var [play2020s,{ stop }] = useSound("Too_Sweet(inst).mp3");
+    const stop20s = stop;
+    const [playing1960s, setPlaying1960s] = useState(false);
+    const [playing1970s, setPlaying1970s] = useState(false);
+    const [playing2000s, setPlaying2000s] = useState(false);
+    const [playing2020s, setPlaying2020s] = useState(false);
+
     const CarouselItem = ({ item, width }) => {
         return (
             <div className="carousel-item flex-shrink-0 flex flex-col items-center justify-center min-h-screen w-full">
@@ -58,6 +85,59 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
             </div>
         );
     };
+
+    const backForthPlay = (forward) => {
+        if (forward) {
+            updateIndex(activeIndex + 1);
+        } else{
+            updateIndex(activeIndex - 1);
+        }
+        if (playing1800s) {
+            stop1800s();
+            setPlaying1800s(!playing1800s);
+            if (forward) {
+                play1960s();
+                setPlaying1960s(!playing1960s);
+            } 
+        } else if (playing1960s) {
+            stop60s();
+            setPlaying1960s(!playing1960s);
+            if (forward) {
+                play1970s();
+                setPlaying1970s(!playing1970s);
+            } else {
+                play1800s();
+                setPlaying1800s(!playing1800s);
+            }
+        } else if (playing1970s) {
+            stop70s();
+            setPlaying1970s(!playing1970s);
+            if (forward) {
+                play2000s();
+                setPlaying2000s(!playing2000s);
+            } else {
+                play1960s();
+                setPlaying1960s(!playing1960s);
+            }
+        } else if (playing2000s) {
+            stop00s();
+            setPlaying2000s(!playing2000s);
+            if (forward) {
+                play2020s();
+                setPlaying2020s(!playing2020s);
+            } else {
+                play1970s();
+                setPlaying1970s(!playing1970s);
+            }
+        } else if (playing2020s) {
+            stop20s();
+            setPlaying2020s(!playing2020s);
+            if (!forward) {
+                play2000s();
+                setPlaying2000s(!playing2000s);
+            }
+        }
+    }
 
     return (
         <div id="carousel" className="hsv-filter relative h-screen flex flex-col justify-center items-center text-white">
@@ -81,18 +161,21 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
                 </div>
                 <div className="absolute bottom-12 left-0 right-0 px-20 flex justify-between items-center z-50 pointer-events-auto">
                     <button
-                        className={`button-arrow px-4 py-2 ${activeIndex === 0 ? 'text-gray-300 cursor-default' : 'text-white'}`}
-                        onClick={() => updateIndex(activeIndex - 1)}
+                        className={`button-arrow px-4 py-2`}
+                        onClick={() => backForthPlay(false)}
                         disabled={activeIndex === 0}
                     >
-                        <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}
-                        ${activeIndex === items.length - 1 ? 'text-gray-900' : 'text-white'}`}>
+                        <span className={`button-arrow material-symbols-outlined ${
+                            activeIndex === 0 ? 'text-gray-300' : 
+                            activeIndex === items.length - 1 ? 'text-gray-900' : 
+                            'text-white'
+                        }`}>
                             ← Prev Decade
                         </span>
                     </button>
                     <button
                         className={`button-arrow px-4 py-2 ${activeIndex >= items.length - 1 ? "text-gray-300 cursor-default" : "text-white"}`}
-                        onClick={() => updateIndex(activeIndex + 1)}
+                        onClick={() => backForthPlay(true)}
                         disabled={activeIndex >= items.length - 1}
                     >
                         <span className={`button-arrow material-symbols-outlined ${activeIndex >= items.length - 1 ? 'text-gray-300' : 'text-white'}`}>
@@ -110,6 +193,8 @@ export default function Landing() {
     const [bounceComplete, setBounceComplete] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [bgColor, setBgColor] = useState("#18181b");
+    const [play1800s, { stop }] = useSound("/Fur_Elise.mp3");
+    const [playing1800s, setPlaying1800s] = useState(true);
 
     useEffect(() => {
         setIsVisible(true);
@@ -140,10 +225,11 @@ export default function Landing() {
     return (
         <div className="overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
             <div id="splash" className="snap-start">
-                <Splash isVisible={isVisible} bounceComplete={bounceComplete} activeIndex={activeIndex} />
+                <Splash isVisible={isVisible} bounceComplete={bounceComplete} activeIndex={activeIndex} play1800s={play1800s} stop1800s={stop} />
             </div>
             <div className="snap-start">
-                <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} />
+                <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} play1800s={play1800s} stop1800s={stop} 
+                playing1800s={playing1800s} setPlaying1800s={setPlaying1800s}/>
             </div>
         </div>
     );
