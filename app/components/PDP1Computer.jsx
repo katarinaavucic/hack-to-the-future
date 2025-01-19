@@ -22,11 +22,20 @@ function PDP1Computer() {
       camera.position.z = 100;
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.minPolarAngle = 0;
-      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.maxPolarAngle = Math.PI * 0.5;
       controls.target.set(-3, 8, 0);
+      controls.enablePan = false;
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+      // Add ambient light
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
       scene.add(ambientLight);
+
+      // Add directional light
+      const light = new THREE.DirectionalLight(0xffffff, 0.5);
+      light.position.set(0, 500, 500);
+      light.target.position.set(0, 0, 0);
+      scene.add(light);
+      scene.add(light.target);
 
       const canvas = document.createElement("canvas");
       canvas.width = 512;
