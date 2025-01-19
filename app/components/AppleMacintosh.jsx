@@ -24,10 +24,21 @@ function AppleMacintosh() {
       camera.position.z = 750;
 
       const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.target.set(0, 45, 0);
+      controls.enablePan = false;
 
-      // Add ambient light
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-      scene.add(ambientLight);
+      // // Add ambient light
+      // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+      // scene.add(ambientLight);
+
+      // Add directional light
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(0, 50, 50);
+      light.target.position.set(0, 0, 0);
+      scene.add(light);
+      scene.add(light.target);
 
       // // Add Line and Text
       // // Create Line and Material

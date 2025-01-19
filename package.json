@@ -16,7 +16,8 @@
     "next": "15.1.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "three-stdlib": "^2.35.7"
+    "three-stdlib": "^2.35.7",
+    "use-sound": "^4.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
