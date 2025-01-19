@@ -176,7 +176,7 @@ function SingleSpiralNotepad({setEightSuccess}) {
   const [leftText, setLeftText] = useState(
     "Welcome to... \n\nHack to the Future!\n\nThis interactive educational experience will guide you through the journey of code, from the early days of computing to the unique nature of programming today.\n\nWe hope that viewing programming through these different perspectives throughout time will allow you a better insight into its evolution."
   ); const [rightText, setRightText] = useState(
-    "Please write “Hello World” on the paper."
+    "Scribble something on the notepad to start!"
   );
 
   return (
