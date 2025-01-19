@@ -5,7 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { motion } from 'framer-motion';
 
-function AppleMacintosh() {
+function AppleMacintosh( {setSeventiesSuccess} ) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Initialize scene, camera, and renderer
@@ -128,7 +128,7 @@ function AppleMacintosh() {
         }
         inputText = inputText.toUpperCase();
         if (inputText === "10 PRINT \"HELLO WORLD!\"\n20 GOTO 10") {
-          console.log('Successful Input');
+          setSeventiesSuccess(true);
         }
         updateCanvasText(inputText);
 

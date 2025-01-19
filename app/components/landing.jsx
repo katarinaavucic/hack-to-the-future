@@ -61,7 +61,9 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
     );
 };
 
-const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s }) => {
+const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s,
+    eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess, twentiesSuccess
+ }) => {
     var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
     const stop60s = stop;
     var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
@@ -173,15 +175,21 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
                             ← Prev Decade
                         </span>
                     </button>
-                    <button
-                        className={`button-arrow px-4 py-2 ${activeIndex >= items.length - 1 ? "text-gray-300 cursor-default" : "text-white"}`}
-                        onClick={() => backForthPlay(true)}
-                        disabled={activeIndex >= items.length - 1}
-                    >
-                        <span className={`button-arrow material-symbols-outlined ${activeIndex >= items.length - 1 ? 'text-gray-300' : 'text-white'}`}>
-                            Next Decade →
-                        </span>
-                    </button>
+                    {((activeIndex === 0) ||
+                      (activeIndex === 1 && sixtiesSuccess) ||
+                      (activeIndex === 2 && seventiesSuccess) ||
+                      (activeIndex === 3 && millSuccess) || 
+                      (activeIndex === 4)) && (
+                        <button
+                            className={`button-arrow px-4 py-2 ${activeIndex >= items.length - 1 ? "text-gray-300 cursor-default" : "text-white"}`}
+                            onClick={() => backForthPlay(true)}
+                            disabled={activeIndex >= items.length - 1}
+                        >
+                            <span className={`button-arrow material-symbols-outlined ${activeIndex >= items.length - 1 ? 'text-gray-300' : 'text-white'}`}>
+                                Next Decade →
+                            </span>
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
@@ -196,6 +204,12 @@ export default function Landing() {
     const [play1800s, { stop }] = useSound("/Fur_Elise.mp3");
     const [playing1800s, setPlaying1800s] = useState(true);
 
+    const [eightSuccess, setEightSuccess] = useState(false);
+    const [sixtiesSuccess, setSixtiesSuccess] = useState(false);
+    const [seventiesSuccess, setSeventiesSuccess] = useState(false);
+    const [millSuccess, setMillSuccess] = useState(false);
+    const [twentiesSuccess, setTwentiesSuccess] = useState(false);
+
     useEffect(() => {
         setIsVisible(true);
         const timer = setTimeout(() => {
@@ -206,9 +220,9 @@ export default function Landing() {
 
     const items = [
         { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#18181b" },
-        { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer />, color:"#F28D8D" },
-        { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh />, color:"#FF6C2E" },
-        { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer />, color:"#497EA8" },
+        { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer setSixtiesSuccess={setSixtiesSuccess} />, color:"#F28D8D" },
+        { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh setSeventiesSuccess={setSeventiesSuccess} />, color:"#FF6C2E" },
+        { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer setMillSuccess={setMillSuccess} />, color:"#497EA8" },
         { id: 5, title: "20s", description: "20s decade", component: <MacbookPro2021 />, color:"#FFF9ED" },
     ];
 
@@ -229,7 +243,8 @@ export default function Landing() {
             </div>
             <div className="snap-start">
                 <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} play1800s={play1800s} stop1800s={stop} 
-                playing1800s={playing1800s} setPlaying1800s={setPlaying1800s}/>
+                playing1800s={playing1800s} setPlaying1800s={setPlaying1800s} eightSuccess={eightSuccess} sixtiesSuccess={sixtiesSuccess}
+                seventiesSuccess={seventiesSuccess} millSuccess={millSuccess} twentiesSuccess={twentiesSuccess}/>
             </div>
         </div>
     );

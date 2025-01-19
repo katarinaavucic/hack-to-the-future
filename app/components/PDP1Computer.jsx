@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function PDP1Computer() {
+function PDP1Computer({ setSixtiesSuccess }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const scene = new THREE.Scene();
@@ -88,10 +88,12 @@ function PDP1Computer() {
         } else if (event.key.length === 1) {
           inputText += event.key;
         }
+        console.log(inputText);
 
         inputText = inputText.toUpperCase();
         if (inputText === 'PROGRAM HELLO\nPRINT *, "HELLO WORLD!"\nEND PROGRAM HELLO') {
-          console.log('Successful Input');
+          console.log("Success!");
+          setSixtiesSuccess(true); 
         }
 
         updateCanvasText();
