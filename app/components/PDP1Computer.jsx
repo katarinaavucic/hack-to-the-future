@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function App() {
+function PDP1Computer() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const scene = new THREE.Scene();
@@ -120,9 +120,9 @@ function App() {
 
   return (
     <div>
-      <canvas id="myThreeJsCanvas" />
+      <canvas id="pdp1ComputerCanvas" style={{ width: '100%', height: '100%' }} />
     </div>
   );
 }
 
-export default App;
+export default PDP1Computer;

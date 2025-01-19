@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function App() {
+function AppleMacintosh() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Initialize scene, camera, and renderer
@@ -169,9 +169,9 @@ function App() {
 
   return (
     <div>
-      <canvas id="myThreeJsCanvas" />
+      <canvas id="appleMacintoshCanvas" style={{ width: '100%', height: '100%' }} />
     </div>
   );
 }
 
-export default App;
+export default AppleMacintosh;

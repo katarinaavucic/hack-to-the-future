@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-function App() {
+function MacbookPro2021() {
   const [inputText, setInputText] = useState("");
   const sceneRef = useRef(null);
   const textureRef = useRef({
@@ -170,9 +170,9 @@ function App() {
 
   return (
     <div>
-      <canvas id="myThreeJsCanvas" />
+      <canvas id="macbookProCanvas" style={{ width: '100%', height: '100%' }} />
     </div>
   );
 }
 
-export default App;
+export default MacbookPro2021;
