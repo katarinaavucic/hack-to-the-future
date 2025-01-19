@@ -78,7 +78,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
     const CarouselItem = ({ item, width }) => {
         return (
             <div className="carousel-item flex-shrink-0 flex flex-col items-center justify-center min-h-screen w-full">
-                <div className="carousel-component object-contain mx-auto" style={{ transform: 'scale(0.9)', position: 'relative', width: '100%', height: '100%' }}>
+                <div className="carousel-component object-contain mx-auto" style={{position: 'relative', width: '100%', height: '100%' }}>
                     {item.component}
                 </div>
                 <div className="text-white carousel-item-text text-center mt-4">{item.description}</div>
@@ -141,7 +141,7 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
 
     return (
         <div id="carousel" className="crt-filter relative h-screen flex flex-col justify-center items-center text-white">
-            <div className="mt-8">
+            <div className="absolute top-4 left-0 right-0 flex justify-center z-50 pointer-events-auto">
                 <button
                     onClick={() => document.getElementById('splash').scrollIntoView({ behavior: 'smooth' })}
                     className={`transition-transform hover:translate-y-1 cursor-pointer ${activeIndex === items.length - 1 ? 'text-gray-900' : 'text-white'}`}
