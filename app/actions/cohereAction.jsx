@@ -1,8 +1,7 @@
+"use server";
 import { CohereClient } from "cohere-ai";
 
 // Log the environment variable temporarily for debugging
-console.log("API Key from process.env:", process.env.COHERE_API_KEY);
-
 const cohereClient = new CohereClient({
   token: process.env.COHERE_API_KEY, // Ensure this matches the key in your .env.local
 });
@@ -11,7 +10,7 @@ export async function generateAnswer(question) {
   if (!question || typeof question !== "string") {
     throw new Error("Invalid question. Please provide a non-empty string.");
   }
-
+  
   try {
     const response = await cohereClient.generate({
       model: "command-xlarge-nightly",
