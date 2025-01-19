@@ -24,10 +24,21 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
       camera.position.z = 750;
 
       const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle =  Math.PI * 0.5;
+      controls.target.set(0, 45, 0);
+      controls.enablePan = false;
 
-      // Add ambient light
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-      scene.add(ambientLight);
+      // // Add ambient light
+      // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+      // scene.add(ambientLight);
+
+      // Add directional light
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(0, 50, 50);
+      light.target.position.set(0, 0, 0);
+      scene.add(light);
+      scene.add(light.target);
 
       // // Add Line and Text
       // // Create Line and Material
@@ -172,9 +183,9 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
   }, []);
 
   const [leftText, setLeftText] = useState(
-    "The Apple Macintosh, launched in 1984, revolutionized personal computing by introducing a user-friendly graphical user interface (GUI) and the innovative use of a mouse, setting it apart from text-based systems. It democratized computing, making technology accessible to non-technical users and influencing future GUI designs. The Mac became a platform for creative industries, thanks to software like Adobe Photoshop and Aldus PageMaker. Its emphasis on aesthetics, integration of hardware and software, and intuitive design set new standards in computing, sparking innovation across the industry and shaping how people interact with computers."
+    "The Apple Macintosh, launched in 1984, revolutionized personal computing by introducing a user-friendly graphical user interface (GUI) and the innovative use of a mouse, setting it apart from text-based systems. It democratized computing, making technology accessible to non-technical users and influencing future GUI designs. BASIC (Beginner's All-purpose Symbolic Instruction Code), developed in 1964, was one of the first programming languages designed to be easy for beginners to learn. It became widely popular in the early days of personal computing, including on the Apple Macintosh."
   ); const [rightText, setRightText] = useState(
-    "Here's how to print hello world"
+    "Here's how to print hello world in BASIC\n\n10 PRINT \"HELLO WORLD!\""
   );
 
   return (
@@ -223,10 +234,9 @@ function AppleMacintosh( {setSeventiesSuccess} ) {
           borderRadius: "8px",
           width: "300px", // Ensure consistent width for better justification
         }}
-      >
-        {rightText}
-      </motion.div>
-    </div>
+        dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+        />
+      </div>
   );
 }
 

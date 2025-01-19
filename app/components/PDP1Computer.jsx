@@ -1,8 +1,9 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { motion } from 'framer-motion';
 
 function PDP1Computer({ setSixtiesSuccess }) {
   useEffect(() => {
@@ -21,9 +22,21 @@ function PDP1Computer({ setSixtiesSuccess }) {
       renderer.setClearColor(0xffffff, 0);
       camera.position.z = 100;
       const controls = new OrbitControls(camera, renderer.domElement);
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle = Math.PI * 0.5;
+      controls.target.set(-3, 8, 0);
+      controls.enablePan = false;
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+      // Add ambient light
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
       scene.add(ambientLight);
+
+      // Add directional light
+      const light = new THREE.DirectionalLight(0xffffff, 0.5);
+      light.position.set(0, 500, 500);
+      light.target.position.set(0, 0, 0);
+      scene.add(light);
+      scene.add(light.target);
 
       const canvas = document.createElement("canvas");
       canvas.width = 512;
@@ -119,9 +132,65 @@ function PDP1Computer({ setSixtiesSuccess }) {
     }
   }, []);
 
+  // // Update canvas whenever inputText changes
+  // useEffect(() => {
+  //   updateCanvasText(inputText);
+  // }, [inputText]);
+
+  const [leftText, setLeftText] = useState(
+    "Developed in 1959, The PDP-1 (Programmed Data Processor-1) was the first computer built in Digital Equipment Corporation's PDP series. The PDP-1 was the original computer for many major inventions, including the earliest video game 'Spacewar!', the text editor, the word processor, the interactive debugger, and the first computer chess program!  Just one year earlier, FORTRAN, the first high-level programming language, was developed by IBM. Fortran is best known for its applications in numeric and scientific computing, and became the base for many programming languages that followed."
+  ); const [rightText, setRightText] = useState(
+    "Here's how to print hello world in FORTRAN\n\nPROGRAM HELLO\nPRINT *, \"HELLO WORLD!\"\nEND PROGRAM HELLO"
+  );
+
   return (
-    <div>
-      <canvas id="pdp1ComputerCanvas" style={{ width: '100%', height: '100%' }} />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="pdp1ComputerCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {leftText}
+      </motion.div>
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+        dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+      />
     </div>
   );
 }

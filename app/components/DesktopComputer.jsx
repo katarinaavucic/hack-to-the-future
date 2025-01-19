@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { motion } from 'framer-motion';
 
 function DesktopComputer({setMillSuccess}) {
   const [inputText, setInputText] = useState("");
@@ -63,6 +64,9 @@ function DesktopComputer({setMillSuccess}) {
     renderer.setClearColor(0xffffff, 0);
     
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle =  Math.PI * 0.5;
+    controls.target.set(-10, 13, -10);
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -168,9 +172,61 @@ function DesktopComputer({setMillSuccess}) {
     updateCanvasText(inputText);
   }, [inputText]);
 
+  
+  const [leftText, setLeftText] = useState(
+    "In the early 2000s, the desktop computer became a common household item. Models like Dell and HP were widely used, providing more people with access to computers and the ability to code. Python, a high-level general-purpose coding language, was developed in the late 1980s by programmer Guido van Rossum. The language gained popularity for its readability and close association to human language, making it one of the most popular coding languages for beginngers, even today!"
+  ); const [rightText, setRightText] = useState(
+    "Here's how to print hello world in Python\n\nprint(\"Hello, World!\")"
+  );
+
   return (
-    <div>
-      <canvas id="desktopComputerCanvas" style={{ width: '100%', height: '100%' }}  />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="desktopComputerCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {leftText}
+      </motion.div>
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+      />
     </div>
   );
 }

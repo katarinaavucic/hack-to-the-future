@@ -13,9 +13,17 @@ function SingleSpiralNotepad() {
       const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('singleSpiralNotepadCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 0);
-      camera.position.set(0.5, 2, 2.5);
 
-      const controls = new OrbitControls(camera, renderer.domElement);
+      // Set camera to bird's-eye view (looking straight down)
+      camera.position.set(0, 3.5, 0); // Move camera above the notepad
+      camera.lookAt(0, 0, 0); // Make camera look at the center of the notepad (the origin)
+
+      // Remove the OrbitControls since we don't need it for a fixed view
+      // const controls = new OrbitControls(camera, renderer.domElement);
+      // controls.minPolarAngle = 0;
+      // controls.maxPolarAngle = Math.PI * 0.5;
+      // controls.target.set(0.5, 0, 0);
+      // controls.enablePan = false;
 
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -35,39 +43,87 @@ function SingleSpiralNotepad() {
           }
         });
 
-        const screenMesh = gltfScene.scene.getObjectByName("Object_14"); 
+        const screenMesh = gltfScene.scene.getObjectByName("Object_14");
         if (screenMesh) {
-          // Create a sample texture (e.g., color or canvas-based)
+          // Create a canvas for the drawing
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
           canvas.width = 256;
           canvas.height = 256;
-          context.fillStyle = '#FFFF00'; // Yellow background
+          context.fillStyle = '#FEFEFE'; // White background
           context.fillRect(0, 0, canvas.width, canvas.height);
-          context.fillStyle = '#00ff00'; // Green text
-          context.font = '20px Arial';
-          context.fillText('Hello, World!', 50, 128);
           const canvasTexture = new THREE.CanvasTexture(canvas);
 
+          // Set the material with the canvas texture
           screenMesh.material = new THREE.MeshBasicMaterial({ map: canvasTexture });
+
+          // Track mouse movement for drawing
+          let isDrawing = false;
+          const mouse = new THREE.Vector2();
+          const raycaster = new THREE.Raycaster();
+
+          // Function to update mouse position and check for clicks
+          function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+          }
+
+          // Function to handle mouse clicks and draw on the texture
+          function onMouseDown(event) {
+            isDrawing = true;
+          }
+
+          // Function to stop drawing on mouse up
+          function onMouseUp() {
+            isDrawing = false;
+          }
+
+          // Raycasting logic to detect click on the notebook page
+          function drawOnPage() {
+            if (isDrawing) {
+              // Set the raycaster based on the mouse position
+              raycaster.setFromCamera(mouse, camera);
+
+              // Get intersections with the "Object_14" (the page mesh)
+              const intersects = raycaster.intersectObject(screenMesh);
+              if (intersects.length > 0) {
+                const intersect = intersects[0];
+                const uv = intersect.uv;
+
+                // Draw on the canvas at the UV position
+                const x = uv.x * canvas.width - 15;
+                const y = (1 - uv.y) * canvas.height - 20;
+
+                context.fillStyle = '#000000'; // Black ink
+                context.fillRect(x, y, 2, 2); // Draw a small rectangle for the pen
+
+                // Update the texture
+                canvasTexture.needsUpdate = true;
+              }
+            }
+          }
+
+          // Event listeners for mouse interaction
+          window.addEventListener('mousemove', onMouseMove, false);
+          window.addEventListener('mousedown', onMouseDown, false);
+          window.addEventListener('mouseup', onMouseUp, false);
+
+          // Animation loop to handle drawing and updates
+          const animate = () => {
+            requestAnimationFrame(animate);
+            drawOnPage(); // Handle drawing
+            renderer.render(scene, camera);
+          };
+          animate();
         }
 
-        gltfScene.scene.rotation.y = (Math.PI / 2) +  (Math.PI / 8);
-        gltfScene.scene.position.set(0, 0, 0); 
-        gltfScene.scene.scale.set(10, 10, 10); 
+        gltfScene.scene.rotation.y = (Math.PI / 2) + (Math.PI / 8);
+        gltfScene.scene.position.set(0, 0, 0);
+        gltfScene.scene.scale.set(10, 10, 10);
         scene.add(gltfScene.scene);
       }, undefined, (error) => {
         console.error('An error occurred while loading the model:', error);
       });
-
-      // Animation loop
-      const animate = () => {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-        console.log('Rendering scene');
-      };
-      animate();
 
       // Handle window resize
       window.addEventListener('resize', () => {
@@ -76,6 +132,13 @@ function SingleSpiralNotepad() {
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
     }
+    // Detect when the Enter key is pressed
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        console.log('Enter key was pressed!');
+        // You can add more logic here for what should happen when Enter is pressed
+      }
+    });
   }, []);
 
   return (
