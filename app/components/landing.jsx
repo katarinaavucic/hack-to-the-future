@@ -6,12 +6,10 @@ import AppleMacintosh from "./AppleMacintosh";
 import DesktopComputer from "./DesktopComputer";
 import MacbookPro2021 from "./MacbookPro2021";
 import SingleSpiralNotepad from "./SingleSpiralNotepad";
-
-
+import "../crt.css"
 const Splash = ({ isVisible, bounceComplete }) => {
-
     return (
-        <div className=" h-screen flex flex-col items-center justify-between text-white">
+        <div className="crt-filter h-screen flex flex-col items-center justify-between text-white">
             <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-white text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li>Anushka, Cici, Katarina, Tyler</li>
@@ -22,10 +20,10 @@ const Splash = ({ isVisible, bounceComplete }) => {
                     <li className="">UofT Hacks 12</li>
                 </ul>
             </div>
-            <div className={`overflow-hidden mt-8 pt-16 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete? "animate-bounceOnce" : "animate-wobbleForever"}`}>
+            <div className={`overflow-hidden mt-8 pt-16 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete ? "animate-bounceOnce" : "animate-wobbleForever"}`}>
                 <img className="scale-85" src="/HACK-TO-the-FUTURE.png" alt="logo" />
             </div>
-            <div className={`pb-8 text-white text-center font-sans text-2xl mt-8 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete? "animate-bounceOnce" : "animate-wobbleForever"}`}>
+            <div className={`pb-8 text-white text-center font-sans text-2xl mt-8 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete ? "animate-bounceOnce" : "animate-wobbleForever"}`}>
                 <h1>Code your way from the past to the future!</h1>
             </div>
             <div className="w-full flex justify-between items-center pl-20 pr-20 text-sm">
@@ -37,7 +35,7 @@ const Splash = ({ isVisible, bounceComplete }) => {
                 </a>
             </div>
             <div className="mb-8">
-                <button 
+                <button
                     onClick={() => document.getElementById('carousel').scrollIntoView({ behavior: 'smooth' })}
                     className="transition-transform hover:translate-y-1 cursor-pointer"
                     aria-label="Scroll to next section"
@@ -62,9 +60,9 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
     };
 
     return (
-        <div id="carousel" className="relative h-screen flex flex-col justify-center items-center text-white">
+        <div id="carousel" className="hsv-filter relative h-screen flex flex-col justify-center items-center text-white">
             <div className="mt-8">
-                <button 
+                <button
                     onClick={() => document.getElementById('splash').scrollIntoView({ behavior: 'smooth' })}
                     className="transition-transform hover:translate-y-1 cursor-pointer"
                     aria-label="Scroll to next section"
@@ -72,7 +70,6 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
                     <ChevronUp size={50} />
                 </button>
             </div>
-            {/* Make carousel container relative for absolute positioning context */}
             <div className="carousel overflow-hidden relative flex-grow w-full">
                 <div
                     className="inner flex transition-transform duration-300"
@@ -82,7 +79,6 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
                         <CarouselItem key={item.id} item={item} width="100%" />
                     ))}
                 </div>
-                {/* Position buttons absolutely within carousel container with high z-index */}
                 <div className="absolute bottom-12 left-0 right-0 px-20 flex justify-between items-center z-50 pointer-events-auto">
                     <button
                         className={`button-arrow px-4 py-2 ${activeIndex === 0 ? 'text-gray-300 cursor-default' : 'text-white'}`}
@@ -90,7 +86,7 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
                         disabled={activeIndex === 0}
                     >
                         <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}`}>
-                            ←	Prev Decade
+                            ← Prev Decade
                         </span>
                     </button>
                     <button
@@ -113,7 +109,7 @@ export default function Landing() {
     const [bounceComplete, setBounceComplete] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [bgColor, setBgColor] = useState("#18181b");
-    
+
     useEffect(() => {
         setIsVisible(true);
         const timer = setTimeout(() => {
@@ -128,7 +124,7 @@ export default function Landing() {
         { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh />, color:"#FF6C2E" },
         { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer />, color:"#497EA8" },
         { id: 5, title: "20s", description: "20s decade", component: <MacbookPro2021 />, color:"#FFF9ED" },
-      ];
+    ];
 
     const updateIndex = (newIndex) => {
         if (newIndex < 0) {
