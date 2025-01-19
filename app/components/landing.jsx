@@ -23,7 +23,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 
 
     return (
-        <div className={`crt-filter h-screen flex flex-col items-center justify-between ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
+        <div className={`h-screen flex flex-col items-center justify-between ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
             {/* <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li>Anushka, Cici, Katarina, Tyler</li>
@@ -235,7 +235,7 @@ export default function Landing() {
     };
 
     return (
-        <div className="overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
+        <div className="crt-filter overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
             <div id="splash" className="snap-start">
                 <Splash isVisible={isVisible} bounceComplete={bounceComplete} activeIndex={activeIndex} play1800s={play1800s} stop1800s={stop} />
             </div>
