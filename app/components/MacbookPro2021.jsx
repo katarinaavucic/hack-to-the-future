@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { motion } from 'framer-motion';
 
 function MacbookPro2021() {
   const [inputText, setInputText] = useState("");
@@ -13,6 +14,8 @@ function MacbookPro2021() {
     canvas: null,
     context: null
   });
+
+  
 
   // Function to update canvas text
   const updateCanvasText = (text) => {
@@ -63,6 +66,8 @@ function MacbookPro2021() {
     controls.minPolarAngle = 0;
     controls.maxPolarAngle =  Math.PI * 0.5;
     controls.target.set(-40, 98, -35);
+    controls.enablePan = false;
+
 
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -80,8 +85,8 @@ function MacbookPro2021() {
       opacity: 1,
     });
 
-    const backgroundPlane = new THREE.Mesh(new THREE.PlaneGeometry(256, 150), backgroundMaterial);
-    backgroundPlane.position.set(-40, 113, -95);
+    const backgroundPlane = new THREE.Mesh(new THREE.PlaneGeometry(290, 167), backgroundMaterial);
+    backgroundPlane.position.set(-40, 111, -95);
     backgroundPlane.rotation.set(0, 0.4, 0);
     scene.add(backgroundPlane);
 
@@ -165,14 +170,48 @@ function MacbookPro2021() {
     };
   }, []);
 
+  const [showText, setShowText] = useState(false);
+  const [disableInput, setDisableInput] = useState(false);
+
   // Update canvas whenever inputText changes
   useEffect(() => {
     updateCanvasText(inputText);
+
+    if (inputText.includes("\n")) {
+      setInputText("");  // Reset the input text
+      setDisableInput(true);  // Disable further input
+      setShowText(true);  // Show the "Why don't you learn how to yourself?" text
+    }
   }, [inputText]);
 
   return (
     <div>
       <canvas id="macbookProCanvas" style={{ width: '100%', height: '100%' }} />
+      {showText && (
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '10%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            color: 'black',
+            pointerEvents: 'none',  // Disable interaction with the text
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3 }}  // Controls the duration of the fade-in
+        >
+          Did you seriously just ask that?
+        </motion.div>
+      )}
+      <input
+        type="text"
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
+        disabled={disableInput}  // Disable input when the animation is triggered
+      />
     </div>
   );
 }
