@@ -1,8 +1,9 @@
 "use client"
-import { useEffect } from 'react';
+import { useEffect,  useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { motion } from 'framer-motion';
 
 function SingleSpiralNotepad({setEightSuccess}) {
   useEffect(() => {
@@ -147,9 +148,60 @@ function SingleSpiralNotepad({setEightSuccess}) {
     });
   }, []);
 
+  
+  const [leftText, setLeftText] = useState(
+    "Welcome to... \n\nHack to the Future!\n\nThis interactive educational experience will guide you through the journey of code, from the early days of computing to the unique nature of programming today.\n\nWe hope that viewing programming through these different perspectives throughout time will allow you a better insight into its evolution."
+  ); const [rightText, setRightText] = useState(
+    "Please write “Hello World” on the paper."
+  );
+
   return (
-    <div>
-      <canvas id="singleSpiralNotepadCanvas" style={{ width: '100%', height: '100%' }} />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="singleSpiralNotepadCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+        dangerouslySetInnerHTML={{ __html: leftText.replace(/\n/g, "<br />") }}
+      />
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+        dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+      />
     </div>
   );
 }
