@@ -4,19 +4,18 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-function DesktopComputer() {
+function SingleSpiralNotepad() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('desktopComputerCanvas') });
+      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('singleSpiralNotepadCanvas') });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor( 0xffffff, 0);
-      camera.position.y = 40; 
-      camera.position.z = 20;
-      camera.position.x = 30;
-      const controls = new OrbitControls(camera, renderer.domElement)
+      renderer.setClearColor(0xffffff, 0);
+      camera.position.set(0.5, 2, 2.5);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
 
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -25,11 +24,18 @@ function DesktopComputer() {
       // Load GLTF model
       let loadedModel;
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load('/assets/desktop_pc/scene.gltf', (gltfScene) => {
+      gltfLoader.load('/assets/single_spiral_notepad/scene.gltf', (gltfScene) => {
         loadedModel = gltfScene;
         console.log('GLTF Scene:', gltfScene);
 
-        const screenMesh = gltfScene.scene.getObjectByName("Plane_Screen_0"); // Replace with actual name
+        // Traverse the model and log each mesh
+        gltfScene.scene.traverse((node) => {
+          if (node.isMesh) {
+            console.log('Mesh found:', node.name, node);
+          }
+        });
+
+        const screenMesh = gltfScene.scene.getObjectByName("Object_14"); 
         if (screenMesh) {
           // Create a sample texture (e.g., color or canvas-based)
           const canvas = document.createElement('canvas');
@@ -46,9 +52,9 @@ function DesktopComputer() {
           screenMesh.material = new THREE.MeshBasicMaterial({ map: canvasTexture });
         }
 
-        gltfScene.scene.rotation.y = Math.PI / 8;
-        gltfScene.scene.position.y = 3;
-        gltfScene.scene.scale.set(10, 10, 10);
+        gltfScene.scene.rotation.y = (Math.PI / 2) +  (Math.PI / 8);
+        gltfScene.scene.position.set(0, 0, 0); 
+        gltfScene.scene.scale.set(10, 10, 10); 
         scene.add(gltfScene.scene);
       }, undefined, (error) => {
         console.error('An error occurred while loading the model:', error);
@@ -57,7 +63,7 @@ function DesktopComputer() {
       // Animation loop
       const animate = () => {
         requestAnimationFrame(animate);
-        controls.update()
+        controls.update();
         renderer.render(scene, camera);
         console.log('Rendering scene');
       };
@@ -74,9 +80,9 @@ function DesktopComputer() {
 
   return (
     <div>
-      <canvas id="desktopComputerCanvas" style={{ width: '100%', height: '100%' }}  />
+      <canvas id="singleSpiralNotepadCanvas" style={{ width: '100%', height: '100%' }} />
     </div>
   );
 }
 
-export default DesktopComputer;
+export default SingleSpiralNotepad;
