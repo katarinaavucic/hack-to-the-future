@@ -38,7 +38,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
                 <img className="scale-85" src="/HACK-TO-the-FUTURE.png" alt="logo" />
             </div>
             <div className={`pb-8 text-white text-center font-sans text-2xl mt-8 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete ? "animate-bounceOnce" : "animate-wobbleForever"}`}>
-                <h1>Code your way from the past to the future!</h1>
+                <h1>Stop, rewind, code through time.</h1>
             </div>
             <div className="w-full flex justify-between items-center pl-20 pr-20 text-sm">
                 <a href="https://github.com/katarinaavucic/hack-to-the-future" className="cursor-pointer hover:italic">
@@ -63,13 +63,13 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 
 const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s,
     eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess}) => {
-    var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
+    var [play1960s, { stop }] = useSound("Fly_Me_to_the_Moon(inst).mp3", {volume: 0.20});
     const stop60s = stop;
     var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
     const stop70s = stop;
     var [play2000s,{ stop }] = useSound("Bye_Bye_Bye(inst).mp3", {});
     const stop00s = stop;
-    var [play2020s,{ stop }] = useSound("Too_Sweet(inst).mp3");
+    var [play2020s,{ stop }] = useSound("Blinding_Lights(inst).mp3", {volume: 0.5});
     const stop20s = stop;
     const [playing1960s, setPlaying1960s] = useState(false);
     const [playing1970s, setPlaying1970s] = useState(false);
@@ -82,7 +82,6 @@ const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playi
                 <div className="carousel-component object-contain mx-auto" style={{position: 'relative', width: '100%', height: '100%' }}>
                     {item.component}
                 </div>
-                <div className="text-white carousel-item-text text-center mt-4">{item.description}</div>
             </div>
         );
     };
@@ -217,11 +216,11 @@ export default function Landing() {
     }, []);
 
     const items = [
-        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad setEightSuccess={setEightSuccess}/>, color:"#18181b" },
-        { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer setSixtiesSuccess={setSixtiesSuccess} />, color:"#F28D8D" },
-        { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh setSeventiesSuccess={setSeventiesSuccess} />, color:"#FF6C2E" },
-        { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer setMillSuccess={setMillSuccess} />, color:"#497EA8" },
-        { id: 5, title: "20s", description: "20s decade", component: <MacbookPro2021 />, color:"#FFF9ED" },
+        { id: 1, title: "Prelude", component: <SingleSpiralNotepad setEightSuccess={setEightSuccess}/>, color:"#18181b" },
+        { id: 2, title: "60s", component: <PDP1Computer setSixtiesSuccess={setSixtiesSuccess} />, color:"#F28D8D" },
+        { id: 3, title: "70s", component: <AppleMacintosh setSeventiesSuccess={setSeventiesSuccess} />, color:"#FF6C2E" },
+        { id: 4, title: "00s", component: <DesktopComputer setMillSuccess={setMillSuccess} />, color:"#497EA8" },
+        { id: 5, title: "20s", component: <MacbookPro2021 />, color:"#FFF9ED" },
     ];
 
     const updateIndex = (newIndex) => {
