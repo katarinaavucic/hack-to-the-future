@@ -16,6 +16,8 @@ All of us are well into our computer science academic careers at this point in o
 - Actually type on a PDP-1 and an Apple Macintosh!
 - An introspective ending on where the discipline is heading…
 
+🎥 View our video walkthrough [here](https://youtu.be/p61F044IpwQ)!
+
 ## Our Tech Stack 💻
 Hack to the Future was developed using Next.js to handle server-side rendering and image optimization alongside React for building our user interface. For 3D graphics, we integrated Three.js through React Three Fiber, allowing for 3D rendering within React components. The visual styling was managed through Tailwind CSS, using Lucide-react for icons, Framer Motion for animations, and Use-sound for audio integration. The application was deployed through Heroku's platform with a GoDaddy-provided domain. Git and GitHub was used for version control during development.
 
@@ -27,3 +29,6 @@ We really put ourselves out of our comfort zone this time, and it resulted in ou
 
 ## The Future of Hack to the Future 🔭
 This is more of a proof of concept - but we think it has the potential to become a full fledged video game or interactive museum piece. We would like to include more models and more languages. Also, we think it would be really cool to have a more advanced code interpreter in each of the languages presented so that you could write real code in BASIC or FORTRAN and have real outputs!
+
+## Attributions
+We acknowledge the assets used in this project in our [attributions file](attributions.txt).
