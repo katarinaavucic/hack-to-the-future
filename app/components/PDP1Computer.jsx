@@ -125,7 +125,7 @@ function PDP1Computer() {
   // }, [inputText]);
 
   const [leftText, setLeftText] = useState(
-    "Developed in 1959, The PDP-1 (Programmed Data Processor-1) is the first computer built in Digital Equipment Corporation's PDP series. The PDP-1 is the original computer for many major inventions including the earliest video games, Spacewar!, the initial text editor, the first word processor, the pioneering interactive debugger, and the first reliable computer chess program!  Just one year earlier, in 1957, FORTRAN, the first high-level programming language, was developed by IBM. Fortran is best known for its applications in numeric and scientific computing, and became the base for many programming languages that followed."
+    "Developed in 1959, The PDP-1 (Programmed Data Processor-1) was the first computer built in Digital Equipment Corporation's PDP series. The PDP-1 was the original computer for many major inventions, including the earliest video game 'Spacewar!', the text editor, the word processor, the interactive debugger, and the first computer chess program!  Just one year earlier, FORTRAN, the first high-level programming language, was developed by IBM. Fortran is best known for its applications in numeric and scientific computing, and became the base for many programming languages that followed."
   ); const [rightText, setRightText] = useState(
     "Here's how to print hello world in FORTRAN\n\nPROGRAM HELLO\nPRINT *, \"HELLO WORLD!\"\nEND PROGRAM HELLO"
   );

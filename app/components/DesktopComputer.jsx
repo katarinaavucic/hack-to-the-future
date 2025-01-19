@@ -171,7 +171,7 @@ function DesktopComputer() {
 
   
   const [leftText, setLeftText] = useState(
-    "Python, a high-level general-purpose coding language, was developed in the late 1980s by programmer Guido van Rossum. Its name comes from the British comedy series 'Monty Python's Flying Circus', which Van Rossum gave was reading at the time of its creation. The language gained popularity for its readability and close assosciation to human language, making it one of the most popular coding languages today!"
+    "In the early 2000s, the desktop computer became a common household item. Models like Dell and HP were widely used, providing more people with access to computers and the ability to code. Python, a high-level general-purpose coding language, was developed in the late 1980s by programmer Guido van Rossum. The language gained popularity for its readability and close association to human language, making it one of the most popular coding languages for beginngers, even today!"
   ); const [rightText, setRightText] = useState(
     "Here's how to print hello world in Python\n\nprint(\"Hello, World!\")"
   );
@@ -222,9 +222,8 @@ function DesktopComputer() {
           borderRadius: "8px",
           width: "300px", // Ensure consistent width for better justification
         }}
-      >
-        {rightText}
-      </motion.div>
+      dangerouslySetInnerHTML={{ __html: rightText.replace(/\n/g, "<br />") }}
+      />
     </div>
   );
 }
