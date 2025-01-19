@@ -7,19 +7,19 @@ import DesktopComputer from "./DesktopComputer";
 import MacbookPro2021 from "./MacbookPro2021";
 import SingleSpiralNotepad from "./SingleSpiralNotepad";
 import "../crt.css"
-const Splash = ({ isVisible, bounceComplete }) => {
+const Splash = ({ isVisible, bounceComplete, activeIndex }) => {
     return (
-        <div className="crt-filter h-screen flex flex-col items-center justify-between text-white">
-            <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-white text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`crt-filter h-screen flex flex-col items-center justify-between text-white ${activeIndex === 4 ? 'text-gray-900' : 'text-white'}`}>
+            {/* <div className={`p-3 transition-all duration-200 justify-center items-center flex font-mono text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li>Anushka, Cici, Katarina, Tyler</li>
                 </ul>
             </div>
-            <div className={`transition-all duration-200 justify-center items-center flex font-mono text-white text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
+            <div className={`transition-all duration-200 justify-center items-center flex font-mono text-sm ${isVisible ? "opacity-100" : "opacity-0"}`}>
                 <ul className="list-none">
                     <li className="">UofT Hacks 12</li>
                 </ul>
-            </div>
+            </div> */}
             <div className={`overflow-hidden mt-8 pt-16 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete ? "animate-bounceOnce" : "animate-wobbleForever"}`}>
                 <img className="scale-85" src="/HACK-TO-the-FUTURE.png" alt="logo" />
             </div>
@@ -64,7 +64,7 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
             <div className="mt-8">
                 <button
                     onClick={() => document.getElementById('splash').scrollIntoView({ behavior: 'smooth' })}
-                    className="transition-transform hover:translate-y-1 cursor-pointer"
+                    className={`transition-transform hover:translate-y-1 cursor-pointer ${activeIndex === items.length - 1 ? 'text-gray-900' : 'text-white'}`}
                     aria-label="Scroll to next section"
                 >
                     <ChevronUp size={50} />
@@ -85,7 +85,8 @@ const Carousel = ({ items, activeIndex, updateIndex }) => {
                         onClick={() => updateIndex(activeIndex - 1)}
                         disabled={activeIndex === 0}
                     >
-                        <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}`}>
+                        <span className={`button-arrow material-symbols-outlined ${activeIndex === 0 ? 'text-gray-300' : 'text-white'}
+                        ${activeIndex === items.length - 1 ? 'text-gray-900' : 'text-white'}`}>
                             ← Prev Decade
                         </span>
                     </button>
@@ -119,7 +120,7 @@ export default function Landing() {
     }, []);
 
     const items = [
-        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#5B5358" },
+        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#18181b" },
         { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer />, color:"#F28D8D" },
         { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh />, color:"#FF6C2E" },
         { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer />, color:"#497EA8" },
@@ -139,7 +140,7 @@ export default function Landing() {
     return (
         <div className="overflow-y-hidden snap-y snap-mandatory h-screen" style={{ backgroundColor: bgColor, transition: "all .3s ease" }}>
             <div id="splash" className="snap-start">
-                <Splash isVisible={isVisible} bounceComplete={bounceComplete} />
+                <Splash isVisible={isVisible} bounceComplete={bounceComplete} activeIndex={activeIndex} />
             </div>
             <div className="snap-start">
                 <Carousel items={items} activeIndex={activeIndex} updateIndex={updateIndex} />
