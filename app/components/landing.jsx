@@ -44,7 +44,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
                 <a href="https://github.com/katarinaavucic/hack-to-the-future" className="cursor-pointer hover:italic">
                     How It Was Made
                 </a>
-                <a href="/attributions" className="cursor-pointer hover:italic">
+                <a href="https://github.com/katarinaavucic/hack-to-the-future/blob/main/attributions.txt" className="cursor-pointer hover:italic">
                     Attributions
                 </a>
             </div>
