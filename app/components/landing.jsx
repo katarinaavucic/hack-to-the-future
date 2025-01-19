@@ -38,7 +38,7 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
                 <img className="scale-85" src="/HACK-TO-the-FUTURE.png" alt="logo" />
             </div>
             <div className={`pb-8 text-white text-center font-sans text-2xl mt-8 transition-all duration-1000 ease-out content-center flex justify-center items-center ${isVisible ? "animate-bounce-then-wobble" : "opacity-0"} ${!bounceComplete ? "animate-bounceOnce" : "animate-wobbleForever"}`}>
-                <h1>Code your way from the past to the future!</h1>
+                <h1>Stop, rewind, code through time.</h1>
             </div>
             <div className="w-full flex justify-between items-center pl-20 pr-20 text-sm">
                 <a href="https://github.com/katarinaavucic/hack-to-the-future" className="cursor-pointer hover:italic">
@@ -63,13 +63,13 @@ const Splash = ({ isVisible, bounceComplete, activeIndex, play1800s, stop1800s }
 
 const Carousel = ({ items, activeIndex, updateIndex, play1800s, stop1800s, playing1800s, setPlaying1800s,
     eightSuccess, sixtiesSuccess, seventiesSuccess, millSuccess}) => {
-    var [play1960s, { stop }] = useSound("Yellow_Submarine(inst).mp3", {volume: 0.25});
+    var [play1960s, { stop }] = useSound("Fly_Me_to_the_Moon(inst).mp3", {volume: 0.25});
     const stop60s = stop;
     var [play1970s, { stop }] = useSound("Never_Gonna_Give_You_Up(inst).mp3", {volume: 0.5});
     const stop70s = stop;
     var [play2000s,{ stop }] = useSound("Bye_Bye_Bye(inst).mp3", {});
     const stop00s = stop;
-    var [play2020s,{ stop }] = useSound("Too_Sweet(inst).mp3");
+    var [play2020s,{ stop }] = useSound("Blinding_Lights(inst).mp3");
     const stop20s = stop;
     const [playing1960s, setPlaying1960s] = useState(false);
     const [playing1970s, setPlaying1970s] = useState(false);
