@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-function SingleSpiralNotepad() {
+function SingleSpiralNotepad({setEightSuccess}) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Initialize scene, camera, and renderer
@@ -28,6 +28,8 @@ function SingleSpiralNotepad() {
       // Add ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
+
+      var count = 0;
 
       // Load GLTF model
       let loadedModel;
@@ -70,7 +72,11 @@ function SingleSpiralNotepad() {
 
           // Function to handle mouse clicks and draw on the texture
           function onMouseDown(event) {
+            count++;
             isDrawing = true;
+            if (count > 1) {
+              setEightSuccess(true);
+            }
           }
 
           // Function to stop drawing on mouse up

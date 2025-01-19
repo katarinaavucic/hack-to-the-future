@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { motion } from 'framer-motion';
 
-function DesktopComputer() {
+function DesktopComputer({setMillSuccess}) {
   const [inputText, setInputText] = useState("");
   const sceneRef = useRef(null);
   const textureRef = useRef({
@@ -18,7 +18,7 @@ function DesktopComputer() {
   // Function to update canvas text
   const updateCanvasText = (text) => {
     if (inputText === 'print("Hello, World!")') { // Check if correct input
-      console.log('Successful Input');
+      setMillSuccess(true);
     }
 
     const { context, canvasTexture, canvas } = textureRef.current;
