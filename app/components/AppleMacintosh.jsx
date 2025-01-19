@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { motion } from 'framer-motion';
 
 function AppleMacintosh() {
   useEffect(() => {
@@ -30,20 +31,15 @@ function AppleMacintosh() {
       scene.add(ambientLight);
 
       // // Add Line and Text
-      // const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0ffffff }, { linewidth: 10 });
-      // const points = [];
-
-      // var screenVector = new THREE.Vector3(320, 200, 0.5);
-      // screenVector.unproject(camera);
-
-      // points.push(new THREE.Vector3(- 10, 0, 0));
-      // points.push(screenVector);
-      // points.push(new THREE.Vector3(10, 0, 0));
-
+      // // Create Line and Material
+      // const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 20 });
+      // const points = [
+      //   new THREE.Vector3(20, 50, 0), // Starting point in 3D space
+      //   new THREE.Vector3(0, 0, 0)   // Placeholder for the dynamic endpoint
+      // ];
       // const geometry = new THREE.BufferGeometry().setFromPoints(points);
       // const line = new THREE.Line(geometry, lineMaterial);
       // scene.add(line);
-
 
       let canvasTexture; // Texture for the screen
       let context; // Canvas context
@@ -151,6 +147,15 @@ function AppleMacintosh() {
 
       // Animation loop
       const animate = () => {
+        // // Update the dynamic endpoint of the line
+        // const screenVector = new THREE.Vector3(10, 10, 0.5); // Screen position
+        // screenVector.unproject(camera); // Convert to world coordinates
+
+        // // Update the second point of the line
+        // points[1].copy(screenVector);
+
+        // // Update the geometry with the new points
+        // geometry.setFromPoints(points);
         requestAnimationFrame(animate);
         controls.update();
         toggleCursorVisibility(); // Toggle cursor visibility
@@ -167,9 +172,61 @@ function AppleMacintosh() {
     }
   }, []);
 
+  const [leftText, setLeftText] = useState(
+    "The Apple Macintosh, launched in 1984, revolutionized personal computing by introducing a user-friendly graphical user interface (GUI) and the innovative use of a mouse, setting it apart from text-based systems. It democratized computing, making technology accessible to non-technical users and influencing future GUI designs. The Mac became a platform for creative industries, thanks to software like Adobe Photoshop and Aldus PageMaker. Its emphasis on aesthetics, integration of hardware and software, and intuitive design set new standards in computing, sparking innovation across the industry and shaping how people interact with computers."
+  ); const [rightText, setRightText] = useState(
+    "Here's how     <br />to print hello world"
+  );
+
   return (
-    <div>
-      <canvas id="appleMacintoshCanvas" style={{ width: '100%', height: '100%' }} />
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <canvas
+        id="appleMacintoshCanvas"
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Left-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {leftText}
+      </motion.div>
+
+      {/* Right-Aligned Text */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 4 }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          textAlign: "right",
+          color: "white",
+          fontSize: "14px",
+          fontFamily: "monospace",
+          background: "rgba(0, 0, 0, 0)",
+          padding: "10px",
+          borderRadius: "8px",
+          width: "300px", // Ensure consistent width for better justification
+        }}
+      >
+        {rightText}
+      </motion.div>
     </div>
   );
 }
