@@ -16,7 +16,7 @@ function PDP1Computer() {
         1000
       );
       const renderer = new THREE.WebGLRenderer({
-        canvas: document.getElementById("myThreeJsCanvas"),
+        canvas: document.getElementById("pdp1ComputerCanvas"), // Correct ID
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 0);

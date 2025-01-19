@@ -57,7 +57,7 @@ function DesktopComputer() {
     
     // Setup renderer
     const renderer = new THREE.WebGLRenderer({ 
-      canvas: document.getElementById('myThreeJsCanvas'),
+      canvas: document.getElementById('desktopComputerCanvas'),
       antialias: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);

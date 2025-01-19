@@ -53,7 +53,7 @@ function MacbookPro2021() {
     
     // Setup renderer with alpha
     const renderer = new THREE.WebGLRenderer({ 
-      canvas: document.getElementById('myThreeJsCanvas'),
+      canvas: document.getElementById('macbookProCanvas'),
       antialias: true,
       alpha: true
     });
