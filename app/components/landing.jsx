@@ -205,7 +205,7 @@ export default function Landing() {
     }, []);
 
     const items = [
-        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#5B5358" },
+        { id: 1, title: "Prelude", description: "Prelude is a decade", component: <SingleSpiralNotepad />, color:"#18181b" },
         { id: 2, title: "60s", description: "60s decade", component: <PDP1Computer />, color:"#F28D8D" },
         { id: 3, title: "70s", description: "70s decade", component: <AppleMacintosh />, color:"#FF6C2E" },
         { id: 4, title: "00s", description: "00s decade", component: <DesktopComputer />, color:"#497EA8" },
